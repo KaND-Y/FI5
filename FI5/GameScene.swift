@@ -451,37 +451,7 @@ class GameScene: SKScene {
         //3 items in background constantly spinning at same rate images are
         print("dont forget to add/create game animation here")
     }
-    
-    //    func normalizeRotationDict(){
-    //       // print("rotdict = \(RotationDict)")
-    //       // print("numringcount = \(numRingCounterForLevel)")
-    //
-    //        for circleNumber in 0...self.numRingCounterForLevel {
-    //            let currentCirc = "currentCircleNum_\(circleNumber)"
-    //           // print(" current rotdict = \(self.RotationDict["\(currentCirc)"])")
-    //
-    //
-    //            let arrayOfCircles = Levels.infoForLevels[levelClicked]
-    //            let currentCircle = arrayOfCircles[circleNumber]
-    //            let pMove = currentCircle.sMoves
-    //           // print("pmove =  \(pMove)")
-    //            print ("not normalized = \(self.RotationDict["\(currentCirc)"])")
-    //
-    //            let newVar = self.RotationDict["\(currentCirc)"]! % 12
-    //
-    //            if pMove == 1{
-    //                self.RotationDict["\(currentCirc)"] = newVar
-    //            }else if pMove == 2{
-    //                self.RotationDict["currentCircleNumb_\(circleNumber)"] = 12 - newVar
-    //            }else{
-    //                print("we have no idea which direction  the \(circleNumber) circle is spinning")
-    //            }
-    //        }
-    //    }
-    
-    
-    
-    
+   
     func NeverRunThis(){
         //
     }
