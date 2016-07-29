@@ -485,6 +485,16 @@ class GameScene: SKScene {
                 if pauseButton.containsPoint(location) {
                     // print("pause button tapped!")
                     
+                    let arrayOfLevelToPlay = Levels.infoForLevels[levelClicked]
+                    self.numRingCounterForLevel = arrayOfLevelToPlay.count - 1
+                    self.ringsLeftSpinning = numRingCounterForLevel
+                    
+                    for circleNumber in 0...numRingCounterForLevel {
+                        print(circleNumber)
+                        
+                        let sprite = CurrentSpriteData["theCircle\(circleNumber)"]
+                        sprite!.removeAllActions()
+                    }
                     
                     //circleOne.removeAllActions()
                     //circleTwo.removeAllActions()
