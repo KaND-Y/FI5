@@ -196,20 +196,25 @@ class GameScene: SKScene {
             }else{
                 self.ARRT = 12 - ringRotTwo! % 12
             }
-            
+            print(RotationDict)
             print(" does \(ARRO) almost == \(ARRT) ?")
             if ARRO == ARRT || ARRO + 1 == ARRT || ARRO - 1 == ARRT{
                 print("YES")
+                winCount += 1
             }else{
                 print("NO")
             }
+            print(numRingCounterForLevel)
+            print(winCount)
             
         }
-        if winCount == numRingCounterForLevel {
+        if winCount == numRingCounterForLevel{
             print("WE WON!!!")
+            winCount = 0
             gameIsEnded()
         }else{
             print("better luck next time")
+            winCount = 0
             gameState = .GameOver
             runCheckState()
         }
@@ -261,6 +266,7 @@ class GameScene: SKScene {
     func weAreOnThePlayGamePage(){
         print("we are on the \(gameState) page")
         //testLevel()
+        RotationDict = [:]
         loadGameLevelSelected()
         
         addChild(pauseButton)
