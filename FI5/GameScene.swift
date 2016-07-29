@@ -295,7 +295,7 @@ class GameScene: SKScene {
         loaderScreen = SKSpriteNode(color: UIColor.whiteColor().colorWithAlphaComponent(0.5), size: CGSize(width: view!.frame.width, height: view!.frame.height))
         loaderScreen.position.x = view!.frame.width / 2
         loaderScreen.position.y = view!.frame.height / 2
-        loaderScreen.zPosition = 5
+        loaderScreen.zPosition = 3
         addChild(loaderScreen)
         
         addChild(playButton)
