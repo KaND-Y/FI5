@@ -25,7 +25,9 @@ class GameScene: SKScene {
     
     var ringsLeftSpinning = 0
     
-    var levelClicked = 7
+    var levelClicked = 0
+    var forba = 1
+    var ALBTouch = 0
     
     var ARRO = 0
     var ARRT = 0
@@ -270,6 +272,7 @@ class GameScene: SKScene {
     
     func weAreOnTheCheckingLevelsPage(){
         print("we are on the \(gameState) page")
+        print("You Are On Level \(levelClicked + 1)")
         
         addChild(homeButton)
         addChild(playButton)
@@ -450,6 +453,16 @@ class GameScene: SKScene {
         runCheckState()
     }
     
+    func pickLevel(touches: Set<UITouch>, withEvent event: UIEvent?){
+        for touch: AnyObject in touches {
+           
+            let location = touch.locationInNode(self)
+            if anotherLevelButton.containsPoint(location){
+                //put code here
+            }
+        }
+    }
+    
     func audioSetUp(){
         let path = NSBundle.mainBundle().pathForResource("fromInside", ofType:".caf")!
         let url = NSURL(fileURLWithPath: path)
@@ -596,7 +609,6 @@ class GameScene: SKScene {
             }
         }
         else if gameState == .CheckingLevels{
-            
             for touch: AnyObject in touches {
                 let location = touch.locationInNode(self)
                 if homeButton.containsPoint(location) {
@@ -612,6 +624,22 @@ class GameScene: SKScene {
                     
                     gameState = .PlayGame
                     runCheckState()
+                }else if anotherLevelButton.containsPoint(location) {
+                    ALBTouch += 1
+                 //pickLevel()
+                     //testCode 8 levels
+                    if forba == 1{
+                        levelClicked += 1
+                        print("You Are On Level \(levelClicked + 1)")
+                        if ALBTouch >= 8{
+                            forba = 2
+                        }
+                    }else{
+                        levelClicked = 0
+                        ALBTouch = 0
+                        print("You Are On Level \(levelClicked + 1)")
+                        forba = 1
+                    }
                 }
             }
         }
