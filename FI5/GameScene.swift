@@ -48,6 +48,7 @@ class GameScene: SKScene {
     let homeButton = SKSpriteNode(color: UIColor.redColor(), size: CGSize(width: 35, height: 35))
     let playButton = SKSpriteNode(color: UIColor.blueColor(), size: CGSize(width: 35, height: 35))
     let levelButton = SKSpriteNode(color: UIColor.yellowColor(), size: CGSize(width: 35, height: 35))
+    let anotherLevelButton = SKSpriteNode(color: UIColor.blueColor(), size: CGSize(width: 20, height: 250))
     
     let arrayOfCircleImages = ["blackRingSetOne", "blackRingSetTwo", "blackRingSetThree", "blackRingSetFour", "blackRingSetFive"]
     let arrayOfNibImages = ["blackNibSetOne", "blackNibSetTwo", "blackNibSetThree", "blackNibSetFour", "blackNibSetFive"]
@@ -89,6 +90,9 @@ class GameScene: SKScene {
         levelButton.position.x = view.frame.width / 2
         levelButton.position.y = view.frame.height * (1 / 8)
         levelButton.zPosition = 4
+        anotherLevelButton.position.x = view.frame.width / 8
+        anotherLevelButton.position.y = view.frame.height / 2
+        anotherLevelButton.zPosition = 4
         pauseButton.position.x = view.frame.width * (7 / 8)
         pauseButton.position.y = view.frame.height * (7 / 8)
         pauseButton.zPosition = 4
@@ -195,15 +199,17 @@ class GameScene: SKScene {
             print(" does \(ARRO) almost == \(ARRT) ?")
             if ARRO == ARRT || ARRO + 1 == ARRT || ARRO - 1 == ARRT{
                 print("YES")
-                winCount += 1
             }else{
                 print("NO")
             }
-            if winCount == numRingCounterForLevel {
-                print("WE WON!!!")
-            }else{
-                print("better luck next time")
-            }
+            
+        }
+        if winCount == numRingCounterForLevel {
+            print("WE WON!!!")
+            gameIsEnded()
+        }else{
+            print("better luck next time")
+            gameIsEnded()
         }
         
         /*  THIS SHOULD RUN EVERYTIME A RING IS STOPPED
@@ -244,7 +250,6 @@ class GameScene: SKScene {
     func weAreOnTheHomePage(){
         print("we are on the \(gameState) page")
         addChild(levelButton)
-        //print("level Button created")
     }
     
     func weAreLeavingTheHomePage(){
@@ -253,7 +258,6 @@ class GameScene: SKScene {
     
     func weAreOnThePlayGamePage(){
         print("we are on the \(gameState) page")
-        
         //testLevel()
         loadGameLevelSelected()
         
@@ -269,11 +273,13 @@ class GameScene: SKScene {
         
         addChild(homeButton)
         addChild(playButton)
+        addChild(anotherLevelButton)
     }
     
     func weAreLeavingtheCheckingLevelsPage(){
         homeButton.removeFromParent()
         playButton.removeFromParent()
+        anotherLevelButton.removeFromParent()
     }
     
     func weAreOnTheGameOverPage(){
@@ -282,6 +288,7 @@ class GameScene: SKScene {
         addChild(playButton)
         addChild(homeButton)
         addChild(levelButton)
+        
     }
     
     func weAreLeavingTheGameOverPage(){
@@ -432,8 +439,15 @@ class GameScene: SKScene {
         //circleOne.removeFromParent()
         //circleTwo.removeFromParent()
         counter = 0
-        resetValues()
         print("game progress deleted")
+    }
+    
+    func gameIsEnded(){
+        print("game is ended")
+        weAreLeavingThePlayGamePage()
+        quitCurrentLevel()
+        gameState = .CheckingLevels
+        runCheckState()
     }
     
     func audioSetUp(){
@@ -662,6 +676,7 @@ class GameScene: SKScene {
                     weAreLeavingThePausePage()
                     
                     quitCurrentLevel()
+                    resetValues()
                     
                     gameState = .Home
                     runCheckState()
@@ -671,6 +686,7 @@ class GameScene: SKScene {
                     weAreLeavingThePausePage()
                     
                     quitCurrentLevel()
+                    resetValues()
                     
                     gameState = .CheckingLevels
                     runCheckState()
