@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		B370CFA01D4BE9D300BE3B1C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B370CF9F1D4BE9D300BE3B1C /* AppDelegate.swift */; };
-		B370CFA21D4BE9D300BE3B1C /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = B370CFA11D4BE9D300BE3B1C /* GameScene.sks */; };
 		B370CFA41D4BE9D300BE3B1C /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = B370CFA31D4BE9D300BE3B1C /* GameScene.swift */; };
 		B370CFA61D4BE9D300BE3B1C /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B370CFA51D4BE9D300BE3B1C /* GameViewController.swift */; };
 		B370CFA91D4BE9D300BE3B1C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B370CFA71D4BE9D300BE3B1C /* Main.storyboard */; };
@@ -16,6 +15,10 @@
 		B370CFAE1D4BE9D300BE3B1C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B370CFAC1D4BE9D300BE3B1C /* LaunchScreen.storyboard */; };
 		B370CFB91D4BE9D300BE3B1C /* FI5Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B370CFB81D4BE9D300BE3B1C /* FI5Tests.swift */; };
 		B370CFC41D4BE9D400BE3B1C /* FI5UITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B370CFC31D4BE9D400BE3B1C /* FI5UITests.swift */; };
+		B370CFD21D4BEA1600BE3B1C /* Levels.swift in Sources */ = {isa = PBXBuildFile; fileRef = B370CFD11D4BEA1600BE3B1C /* Levels.swift */; };
+		B370CFD71D4BEA5C00BE3B1C /* fromInside.caf in Resources */ = {isa = PBXBuildFile; fileRef = B370CFD41D4BEA5C00BE3B1C /* fromInside.caf */; };
+		B370CFD81D4BEA5C00BE3B1C /* lockMe.caf in Resources */ = {isa = PBXBuildFile; fileRef = B370CFD51D4BEA5C00BE3B1C /* lockMe.caf */; };
+		B370CFD91D4BEA5C00BE3B1C /* lockMeTwo.caf in Resources */ = {isa = PBXBuildFile; fileRef = B370CFD61D4BEA5C00BE3B1C /* lockMeTwo.caf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -38,7 +41,6 @@
 /* Begin PBXFileReference section */
 		B370CF9C1D4BE9D300BE3B1C /* FI5.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FI5.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B370CF9F1D4BE9D300BE3B1C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		B370CFA11D4BE9D300BE3B1C /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
 		B370CFA31D4BE9D300BE3B1C /* GameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; };
 		B370CFA51D4BE9D300BE3B1C /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
 		B370CFA81D4BE9D300BE3B1C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -51,6 +53,10 @@
 		B370CFBF1D4BE9D400BE3B1C /* FI5UITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FI5UITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B370CFC31D4BE9D400BE3B1C /* FI5UITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FI5UITests.swift; sourceTree = "<group>"; };
 		B370CFC51D4BE9D400BE3B1C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B370CFD11D4BEA1600BE3B1C /* Levels.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Levels.swift; sourceTree = "<group>"; };
+		B370CFD41D4BEA5C00BE3B1C /* fromInside.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = fromInside.caf; sourceTree = "<group>"; };
+		B370CFD51D4BEA5C00BE3B1C /* lockMe.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = lockMe.caf; sourceTree = "<group>"; };
+		B370CFD61D4BEA5C00BE3B1C /* lockMeTwo.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = lockMeTwo.caf; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -102,11 +108,12 @@
 			isa = PBXGroup;
 			children = (
 				B370CF9F1D4BE9D300BE3B1C /* AppDelegate.swift */,
-				B370CFA11D4BE9D300BE3B1C /* GameScene.sks */,
 				B370CFA31D4BE9D300BE3B1C /* GameScene.swift */,
+				B370CFD11D4BEA1600BE3B1C /* Levels.swift */,
 				B370CFA51D4BE9D300BE3B1C /* GameViewController.swift */,
 				B370CFA71D4BE9D300BE3B1C /* Main.storyboard */,
 				B370CFAA1D4BE9D300BE3B1C /* Assets.xcassets */,
+				B370CFD31D4BEA5C00BE3B1C /* SFX */,
 				B370CFAC1D4BE9D300BE3B1C /* LaunchScreen.storyboard */,
 				B370CFAF1D4BE9D300BE3B1C /* Info.plist */,
 			);
@@ -129,6 +136,16 @@
 				B370CFC51D4BE9D400BE3B1C /* Info.plist */,
 			);
 			path = FI5UITests;
+			sourceTree = "<group>";
+		};
+		B370CFD31D4BEA5C00BE3B1C /* SFX */ = {
+			isa = PBXGroup;
+			children = (
+				B370CFD41D4BEA5C00BE3B1C /* fromInside.caf */,
+				B370CFD51D4BEA5C00BE3B1C /* lockMe.caf */,
+				B370CFD61D4BEA5C00BE3B1C /* lockMeTwo.caf */,
+			);
+			path = SFX;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -235,9 +252,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B370CFA21D4BE9D300BE3B1C /* GameScene.sks in Resources */,
 				B370CFAE1D4BE9D300BE3B1C /* LaunchScreen.storyboard in Resources */,
 				B370CFAB1D4BE9D300BE3B1C /* Assets.xcassets in Resources */,
+				B370CFD71D4BEA5C00BE3B1C /* fromInside.caf in Resources */,
+				B370CFD81D4BEA5C00BE3B1C /* lockMe.caf in Resources */,
+				B370CFD91D4BEA5C00BE3B1C /* lockMeTwo.caf in Resources */,
 				B370CFA91D4BE9D300BE3B1C /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -265,6 +284,7 @@
 			files = (
 				B370CFA41D4BE9D300BE3B1C /* GameScene.swift in Sources */,
 				B370CFA61D4BE9D300BE3B1C /* GameViewController.swift in Sources */,
+				B370CFD21D4BEA1600BE3B1C /* Levels.swift in Sources */,
 				B370CFA01D4BE9D300BE3B1C /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
