@@ -145,7 +145,7 @@ class GameScene: SKScene {
             sprite.addChild(theNib)
             theNib.position.x = sprite.frame.width / 2
             theNib.position.y = sprite.frame.height / 2
-            theNib.zPosition = 2
+            theNib.zPosition = 1
             theNib.anchorPoint = CGPointMake(1.0,1.0)
             
             let updateDegreeCounter = SKAction.runBlock{
