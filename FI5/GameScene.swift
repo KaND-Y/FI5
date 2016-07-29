@@ -135,7 +135,6 @@ class GameScene: SKScene {
             }
             let sprite = theCircle
             sprite.name = "theCircle\(circleNumber)"
-            print("its name is \(sprite.name)")
             
             self.addChild(sprite)
             
@@ -209,7 +208,8 @@ class GameScene: SKScene {
             gameIsEnded()
         }else{
             print("better luck next time")
-            gameIsEnded()
+            gameState = .GameOver
+            runCheckState()
         }
         
         /*  THIS SHOULD RUN EVERYTIME A RING IS STOPPED
@@ -284,10 +284,12 @@ class GameScene: SKScene {
     
     func weAreOnTheGameOverPage(){
         print("we are on the \(gameState) page")
-        
+        weAreLeavingThePlayGamePage()
+        quitCurrentLevel()
         addChild(playButton)
         addChild(homeButton)
         addChild(levelButton)
+        
         
     }
     
@@ -314,7 +316,6 @@ class GameScene: SKScene {
         // data needed to also check win state  //
         //////////////////////////////////////////
         
-        print(RotationDict)
     }
     
     func weAreLeavingThePausePage(){
@@ -430,7 +431,6 @@ class GameScene: SKScene {
             self.ringsLeftSpinning = numRingCounterForLevel
             
             for circleNumber in 0...numRingCounterForLevel {
-                print(circleNumber)
                 
                 let sprite = CurrentSpriteData["theCircle\(circleNumber)"]
                 sprite!.removeFromParent()
@@ -532,7 +532,6 @@ class GameScene: SKScene {
                     self.ringsLeftSpinning = numRingCounterForLevel
                     
                     for circleNumber in 0...numRingCounterForLevel {
-                        print(circleNumber)
                         
                         let sprite = CurrentSpriteData["theCircle\(circleNumber)"]
                         sprite!.removeAllActions()
@@ -553,7 +552,7 @@ class GameScene: SKScene {
                     // testTouch()
                     // testTouchTwo()
                     
-                    print("\(ringsLeftSpinning) out of \(numRingCounterForLevel)")
+                    print("\(numRingCounterForLevel - ringsLeftSpinning) out of \(numRingCounterForLevel)")
                     
                     CurrentSpriteData["theCircle\(numRingCounterForLevel - ringsLeftSpinning)"]!.removeAllActions()
                     ringsLeftSpinning -= 1
@@ -628,8 +627,6 @@ class GameScene: SKScene {
                     self.ringsLeftSpinning = numRingCounterForLevel
                     
                     for circleNumber in 0...numRingCounterForLevel {
-                        print(circleNumber)
-                        
                         
                         let arrayOfLevelToPlay = Levels.infoForLevels[levelClicked]
                         let arrayOfCircleToCreate = arrayOfLevelToPlay[circleNumber]
