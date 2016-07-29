@@ -118,6 +118,7 @@ class GameScene: SKScene {
             let rSpeed = Double(rSpeedIs)
             let rotate = SKAction.rotateByAngle(CGFloat(M_PI) / 12, duration: rSpeed / 16)
             let rotateBack = SKAction.rotateByAngle(CGFloat(M_PI) / -12, duration: rSpeed / 16)
+           
             
             
             let theCircle = SKSpriteNode(texture: SKTexture(imageNamed: arrayOfCircleImages[circleNumber]), color: UIColor.blueColor(), size: CGSize(width: 400, height: 400))
@@ -391,16 +392,43 @@ class GameScene: SKScene {
         }
     }
     
+    func testTouchTwo(){
+        
+        for eachChild in children {
+            var theActualChildName: String
+            if let childName = eachChild.name {
+                theActualChildName = childName
+            } else {
+                theActualChildName = "Undefined"
+            }
+            print("NODE NAME = \(theActualChildName)")
+        }
+        for anum in 0...CurrentSpriteData.count{
+            print("\(CurrentSpriteData["theCircle\(anum + 1)"])")
+        }
+        
+        print("\(CurrentSpriteData)")
+        
+    }
+    
     ////////////////////////////////////////////////////////////////////////////////////
     //////////////////////////////  helper functions ///////////////////////////////////
     ////////////////////////////////////////////////////////////////////////////////////
     
     func quitCurrentLevel(){
         
-        ///////////////////////////////////////
-        // deletion ring/nib rotation needed //
-        ///////////////////////////////////////
-        
+            
+            let arrayOfLevelToPlay = Levels.infoForLevels[levelClicked]
+            self.numRingCounterForLevel = arrayOfLevelToPlay.count - 1
+            self.ringsLeftSpinning = numRingCounterForLevel
+            
+            for circleNumber in 0...numRingCounterForLevel {
+                print(circleNumber)
+                
+                let sprite = CurrentSpriteData["theCircle\(circleNumber)"]
+                sprite!.removeFromParent()
+        }
+                
         //circleOne.removeFromParent()
         //circleTwo.removeFromParent()
         counter = 0
@@ -451,7 +479,7 @@ class GameScene: SKScene {
         //3 items in background constantly spinning at same rate images are
         print("dont forget to add/create game animation here")
     }
-   
+    
     func NeverRunThis(){
         //
     }
@@ -509,24 +537,7 @@ class GameScene: SKScene {
                 }else{
                     self.runAction(clickSound)
                     // testTouch()
-                    
-                    //                    for eachChild in children {
-                    //                        var theActualChildName: String
-                    //                        if let childName = eachChild.name {
-                    //                            theActualChildName = childName
-                    //                        } else {
-                    //                            theActualChildName = "Undefined"
-                    //                        }
-                    //                        print("NODE NAME = \(theActualChildName)")
-                    //                    }
-                    
-                    //                    //theCircle1.removeAllActions()
-                    //                    for anum in 0...CurrentSpriteData.count{
-                    //                    print("\(CurrentSpriteData["theCircle\(anum + 1)"])")
-                    //                    }
-                    
-                    // print("\(CurrentSpriteData)")
-                    
+                    // testTouchTwo()
                     
                     print("\(ringsLeftSpinning) out of \(numRingCounterForLevel)")
                     
@@ -598,9 +609,39 @@ class GameScene: SKScene {
                 let location = touch.locationInNode(self)
                 if playButton.containsPoint(location) {
                     
-                    ////////////////////////////////////////////
-                    //  un-pause of ring/nib rotation needed  //
-                    ////////////////////////////////////////////
+                    let arrayOfLevelToPlay = Levels.infoForLevels[levelClicked]
+                    self.numRingCounterForLevel = arrayOfLevelToPlay.count - 1
+                    self.ringsLeftSpinning = numRingCounterForLevel
+                    
+                    for circleNumber in 0...numRingCounterForLevel {
+                        print(circleNumber)
+                        
+                        
+                        let arrayOfLevelToPlay = Levels.infoForLevels[levelClicked]
+                        let arrayOfCircleToCreate = arrayOfLevelToPlay[circleNumber]
+                        
+                        let sprite = CurrentSpriteData["theCircle\(circleNumber)"]
+                        let rSpeedIs = arrayOfCircleToCreate.sSpeed
+                        let rSpeed = Double(rSpeedIs)
+                        let rotate = SKAction.rotateByAngle(CGFloat(M_PI) / 12, duration: rSpeed / 16)
+                        let rotateBack = SKAction.rotateByAngle(CGFloat(M_PI) / -12, duration: rSpeed / 16)
+                        let currentCircleNum = "currentCircleNum_\(circleNumber)"
+                        
+                        let updateDegreeCounter = SKAction.runBlock{
+                            self.incrementCircle(currentCircleNum)
+                        }
+                        let seqOne = SKAction.sequence([rotate, updateDegreeCounter])
+                        let repeatLoopOne = SKAction.repeatActionForever(seqOne)
+                        let seqTwo = SKAction.sequence([rotateBack, updateDegreeCounter])
+                        let repeatLoopTwo = SKAction.repeatActionForever(seqTwo)
+                        
+                        
+                        if arrayOfCircleToCreate.sMoves == 1{
+                            sprite!.runAction(repeatLoopOne)
+                        }else{
+                            sprite!.runAction(repeatLoopTwo)
+                        }
+                    }
                     
                     // circleOne.runAction(rotateForever)
                     // circleTwo.runAction(rotatecircleTwoForever)
@@ -614,7 +655,7 @@ class GameScene: SKScene {
                     resetValues()
                     
                     gameState = .PlayGame
-                    runCheckState()
+                    //runCheckState()
                     
                 }else if homeButton.containsPoint(location) {
                     
