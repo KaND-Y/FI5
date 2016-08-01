@@ -46,11 +46,14 @@ class GameScene: SKScene {
     var backgroundSFX: AVAudioPlayer!
     let clickSound = SKAction.playSoundFileNamed("lockMeTwo", waitForCompletion: false)
     
-    let pauseButton = SKSpriteNode(color: UIColor.orangeColor(), size: CGSize(width: 35, height: 35))
-    let homeButton = SKSpriteNode(color: UIColor.redColor(), size: CGSize(width: 35, height: 35))
-    let playButton = SKSpriteNode(color: UIColor.blueColor(), size: CGSize(width: 35, height: 35))
-    let levelButton = SKSpriteNode(color: UIColor.yellowColor(), size: CGSize(width: 35, height: 35))
+    let pauseButton = SKSpriteNode(texture: SKTexture(imageNamed: "PButton"), color: UIColor.blueColor(), size: CGSize(width: 75, height: 35))
+    let homeButton = SKSpriteNode(texture: SKTexture(imageNamed: "HButton"), color: UIColor.blueColor(), size: CGSize(width: 75, height: 35))
+    let playButton = SKSpriteNode(texture: SKTexture(imageNamed: "PLButton"), color: UIColor.blueColor(), size: CGSize(width: 75, height: 35))
+    let levelButton = SKSpriteNode(texture: SKTexture(imageNamed: "LButton"), color: UIColor.blueColor(), size: CGSize(width: 75, height: 35))
     let anotherLevelButton = SKSpriteNode(color: UIColor.blueColor(), size: CGSize(width: 20, height: 250))
+    
+    let theArrow = SKSpriteNode(texture: SKTexture(imageNamed: "daArrow"), color: UIColor.blueColor(), size: CGSize(width: 350, height: 350))
+    
     
     let arrayOfCircleImages = ["blackRingSetOne", "blackRingSetTwo", "blackRingSetThree", "blackRingSetFour", "blackRingSetFive"]
     let arrayOfNibImages = ["blackNibSetOne", "blackNibSetTwo", "blackNibSetThree", "blackNibSetFour", "blackNibSetFive"]
@@ -114,6 +117,16 @@ class GameScene: SKScene {
         self.numRingCounterForLevel = arrayOfLevelToPlay.count - 1
         self.ringsLeftSpinning = numRingCounterForLevel
         
+        let theLight = SKSpriteNode(texture: SKTexture(imageNamed: "blackLight"), color: UIColor.blueColor(), size: CGSize(width: 350, height: 350))
+        theLight.position.x = self.frame.width / 2
+        theLight.position.y = self.frame.height / 2
+        theLight.zPosition = 1
+        theLight.alpha = 1.0
+        addChild(theLight)
+        
+        
+        addChild(theArrow)
+        
         for circleNumber in 0...numRingCounterForLevel {
             let arrayOfCircleToCreate = arrayOfLevelToPlay[circleNumber]
             //print("\(arrayOfCircleToCreate) is the perameters for the circle # \(circleNumber) being created")
@@ -124,11 +137,14 @@ class GameScene: SKScene {
             let rSpeed = Double(rSpeedIs)
             let rotate = SKAction.rotateByAngle(CGFloat(M_PI) / 12, duration: rSpeed / 16)
             let rotateBack = SKAction.rotateByAngle(CGFloat(M_PI) / -12, duration: rSpeed / 16)
-           
             
+            theArrow.position.x = self.frame.width / 2
+            theArrow.position.y = self.frame.height / 2
+            theArrow.zPosition = 1
+            theArrow.alpha = 1.0
             
-            let theCircle = SKSpriteNode(texture: SKTexture(imageNamed: arrayOfCircleImages[circleNumber]), color: UIColor.blueColor(), size: CGSize(width: 400, height: 400))
-            let theNib = SKSpriteNode(texture: SKTexture(imageNamed:arrayOfNibImages[circleNumber]), color: UIColor.blueColor(), size: CGSize(width: 400, height: 400))
+            let theCircle = SKSpriteNode(texture: SKTexture(imageNamed: arrayOfCircleImages[circleNumber]), color: UIColor.blueColor(), size: CGSize(width: 350, height: 350))
+            let theNib = SKSpriteNode(texture: SKTexture(imageNamed:arrayOfNibImages[circleNumber]), color: UIColor.blueColor(), size: CGSize(width: 350, height: 350))
             
             if self.RotationDict[currentCircleNum] != nil{
                 self.RotationDict[currentCircleNum]! += 1
@@ -138,13 +154,15 @@ class GameScene: SKScene {
             let sprite = theCircle
             sprite.name = "theCircle\(circleNumber)"
             
+            
             self.addChild(sprite)
             
             CurrentSpriteData[sprite.name!] = theCircle
             
             sprite.position.x = self.frame.width / 2
             sprite.position.y = self.frame.height / 2
-            sprite.zPosition = 1
+            sprite.zPosition = 0.75
+            sprite.alpha = 1.0
             ///////////////////////////////////////////
             //  NIB ROTATION AND DUPLICATION NEEDED  //
             ///////////////////////////////////////////
@@ -163,10 +181,18 @@ class GameScene: SKScene {
             let seqTwo = SKAction.sequence([rotateBack, updateDegreeCounter])
             let repeatLoopTwo = SKAction.repeatActionForever(seqTwo)
             
+            
+            
             if arrayOfCircleToCreate.sMoves == 1{
                 sprite.runAction(repeatLoopOne)
+                if sprite.name == "theCircle0"{
+                    theArrow.runAction(repeatLoopOne)
+                }
             }else{
                 sprite.runAction(repeatLoopTwo)
+                if sprite.name == "theCircle0"{
+                    theArrow.runAction(repeatLoopTwo)
+                }
             }
         }
     }
@@ -178,7 +204,10 @@ class GameScene: SKScene {
         for ring in 0...numRingCounterForLevel - 1{
             let ringRotOne = self.RotationDict["currentCircleNum_\(ring)"]
             let ringRotTwo = self.RotationDict["currentCircleNum_\(ring + 1)"]
-            
+            if ringRotOne == self.RotationDict["currentCircleNum_0"]{
+                let newCurNum = self.RotationDict["currentCircleNum_0"]! / 2
+                self.RotationDict["currentCircleNum_0"] = newCurNum
+            }
             let arrayOfCircles = Levels.infoForLevels[levelClicked]
             let currentCircle = arrayOfCircles[ring]
             let nextCircle = arrayOfCircles[ring + 1]
@@ -196,9 +225,9 @@ class GameScene: SKScene {
             }else{
                 self.ARRT = 12 - ringRotTwo! % 12
             }
-            print(RotationDict)
+           // print(RotationDict)
             print(" does \(ARRO) almost == \(ARRT) ?")
-            if ARRO == ARRT || ARRO + 1 == ARRT || ARRO - 1 == ARRT{
+            if ARRO == ARRT || ARRO + 1 == ARRT || ARRO - 1 == ARRT || ARRO + 2 == ARRT || ARRO - 2 == ARRT{
                 print("YES")
                 winCount += 1
             }else{
@@ -211,6 +240,11 @@ class GameScene: SKScene {
         if winCount == numRingCounterForLevel{
             print("WE WON!!!")
             winCount = 0
+            if 0 <= levelClicked && levelClicked <= 9{
+                levelClicked += 1
+            }else{
+                levelClicked = 0
+            }
             gameIsEnded()
         }else{
             print("better luck next time")
@@ -434,17 +468,18 @@ class GameScene: SKScene {
     
     func quitCurrentLevel(){
         
+        
+        let arrayOfLevelToPlay = Levels.infoForLevels[levelClicked]
+        self.numRingCounterForLevel = arrayOfLevelToPlay.count - 1
+        self.ringsLeftSpinning = numRingCounterForLevel
+        
+        for circleNumber in 0...numRingCounterForLevel {
             
-            let arrayOfLevelToPlay = Levels.infoForLevels[levelClicked]
-            self.numRingCounterForLevel = arrayOfLevelToPlay.count - 1
-            self.ringsLeftSpinning = numRingCounterForLevel
-            
-            for circleNumber in 0...numRingCounterForLevel {
-                
-                let sprite = CurrentSpriteData["theCircle\(circleNumber)"]
-                sprite!.removeFromParent()
+            let sprite = CurrentSpriteData["theCircle\(circleNumber)"]
+            sprite!.removeFromParent()
         }
-                
+        self.theArrow.removeFromParent()
+        
         //circleOne.removeFromParent()
         //circleTwo.removeFromParent()
         counter = 0
@@ -461,7 +496,7 @@ class GameScene: SKScene {
     
     func pickLevel(touches: Set<UITouch>, withEvent event: UIEvent?){
         for touch: AnyObject in touches {
-           
+            
             let location = touch.locationInNode(self)
             if anotherLevelButton.containsPoint(location){
                 //put code here
@@ -553,8 +588,10 @@ class GameScene: SKScene {
                     for circleNumber in 0...numRingCounterForLevel {
                         
                         let sprite = CurrentSpriteData["theCircle\(circleNumber)"]
+                        
                         sprite!.removeAllActions()
                     }
+                        theArrow.removeAllActions()
                     
                     //circleOne.removeAllActions()
                     //circleTwo.removeAllActions()
@@ -574,8 +611,12 @@ class GameScene: SKScene {
                     print("\(numRingCounterForLevel - ringsLeftSpinning) out of \(numRingCounterForLevel)")
                     
                     CurrentSpriteData["theCircle\(numRingCounterForLevel - ringsLeftSpinning)"]!.removeAllActions()
-                    ringsLeftSpinning -= 1
                     
+                    
+                    if numRingCounterForLevel == ringsLeftSpinning {
+                            theArrow.removeAllActions()
+                    }
+                    ringsLeftSpinning -= 1
                     if ringsLeftSpinning <= -1 {
                         gameState = .CheckingWinOrLose
                         runCheckState()
@@ -632,8 +673,8 @@ class GameScene: SKScene {
                     runCheckState()
                 }else if anotherLevelButton.containsPoint(location) {
                     ALBTouch += 1
-                 //pickLevel()
-                     //testCode 8 levels
+                    //pickLevel()
+                    //testCode 8 levels
                     if forba == 1{
                         levelClicked += 1
                         print("You Are On Level \(levelClicked + 1)")
@@ -683,8 +724,14 @@ class GameScene: SKScene {
                         
                         if arrayOfCircleToCreate.sMoves == 1{
                             sprite!.runAction(repeatLoopOne)
+                            if sprite!.name == "theCircle0"{
+                                theArrow.runAction(repeatLoopOne)
+                            }
                         }else{
                             sprite!.runAction(repeatLoopTwo)
+                            if sprite!.name == "theCircle0"{
+                                theArrow.runAction(repeatLoopTwo)
+                            }
                         }
                     }
                     
