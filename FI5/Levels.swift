@@ -29,13 +29,13 @@ class Levels{
             (sRings: 0, sSpeed: 6, sNibs: 0, sDegrees: 0, sMoves: 1), (sRings: 0, sSpeed: 4, sNibs: 0, sDegrees: 0, sMoves: 1),
         ],
         [
-            (sRings: 0, sSpeed: 7, sNibs: 0, sDegrees: 0, sMoves: 2), (sRings: 0, sSpeed: 8, sNibs: 0, sDegrees: 0, sMoves: 1),
+            (sRings: 0, sSpeed: 7, sNibs: 0, sDegrees: 0, sMoves: 2), (sRings: 0, sSpeed: 3, sNibs: 0, sDegrees: 0, sMoves: 1),
         ],
         [
             (sRings: 0, sSpeed: 4, sNibs: 0, sDegrees: 0, sMoves: 1), (sRings: 0, sSpeed: 8, sNibs: 0, sDegrees: 0, sMoves: 1), (sRings: 0, sSpeed: 5, sNibs: 0, sDegrees: 0, sMoves: 1)
         ],
         [
-            (sRings: 0, sSpeed: 6, sNibs: 0, sDegrees: 0, sMoves: 1), (sRings: 0, sSpeed: 8, sNibs: 0, sDegrees: 0, sMoves: 1), (sRings: 0, sSpeed: 8, sNibs: 0, sDegrees: 0, sMoves: 1)
+            (sRings: 0, sSpeed: 6, sNibs: 0, sDegrees: 0, sMoves: 1), (sRings: 0, sSpeed: 8, sNibs: 0, sDegrees: 0, sMoves: 1), (sRings: 0, sSpeed: 5, sNibs: 0, sDegrees: 0, sMoves: 1)
         ],
         [
             (sRings: 0, sSpeed: 7, sNibs: 0, sDegrees: 0, sMoves: 2), (sRings: 0, sSpeed: 4, sNibs: 0, sDegrees: 0, sMoves: 1), (sRings: 0, sSpeed: 8, sNibs: 0, sDegrees: 0, sMoves: 1), (sRings: 0, sSpeed: 5, sNibs: 0, sDegrees: 0, sMoves: 2)
