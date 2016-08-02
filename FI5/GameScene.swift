@@ -211,17 +211,19 @@ class GameScene: SKScene {
         for ring in 0...numRingCounterForLevel - 1{
             let ringRotOne = self.RotationDict["currentCircleNum_\(ring)"]
             let ringRotTwo = self.RotationDict["currentCircleNum_\(ring + 1)"]
-            if ringRotOne == self.RotationDict["currentCircleNum_0"]{
-                let newCurNum = self.RotationDict["currentCircleNum_0"]! / 2
-                self.RotationDict["currentCircleNum_0"] = newCurNum
-            }
+            
+//            if ringRotOne == self.RotationDict["currentCircleNum_0"]{
+//                let newCurNum = self.RotationDict["currentCircleNum_0"]! / 2
+//                self.RotationDict["currentCircleNum_0"] = newCurNum
+//            }
+            
             let arrayOfCircles = Levels.infoForLevels[levelClicked]
             let currentCircle = arrayOfCircles[ring]
             let nextCircle = arrayOfCircles[ring + 1]
             
             let pMoveOne = currentCircle.sMoves
             let pMoveTwo = nextCircle.sMoves
-            
+            print("\(ringRotOne) next \(ringRotTwo)")
             if pMoveOne == 1{
                 self.ARRO = ringRotOne! % 12
             }else{
@@ -492,6 +494,7 @@ class GameScene: SKScene {
         //circleOne.removeFromParent()
         //circleTwo.removeFromParent()
         counter = 0
+        RotationDict = [:]
         print("game progress deleted")
     }
     
@@ -588,7 +591,6 @@ class GameScene: SKScene {
             for touch: AnyObject in touches {
                 let location = touch.locationInNode(self)
                 if pauseButton.containsPoint(location) {
-                    // print("pause button tapped!")
                     
                     let arrayOfLevelToPlay = Levels.infoForLevels[levelClicked]
                     self.numRingCounterForLevel = arrayOfLevelToPlay.count - 1
