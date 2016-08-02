@@ -249,15 +249,11 @@ class GameScene: SKScene {
             print("\(winCount) won out of \(numRingCounterForLevel)")
             print("WE WON!!!")
             winCount = 0
-            if 0 <= levelClicked && levelClicked <= 9{
-                levelClicked += 1
-            }else{
-                levelClicked = 0
-            }
             gameIsEnded()
         }else{
             print("\(winCount) won out of \(numRingCounterForLevel)")
             print("better luck next time")
+            winCount = 0
             gameState = .GameOver
             runCheckState()
         }
@@ -499,9 +495,15 @@ class GameScene: SKScene {
     }
     
     func gameIsEnded(){
+        //for if winstate
         print("game is ended")
         weAreLeavingThePlayGamePage()
         quitCurrentLevel()
+        if 0 <= levelClicked && levelClicked <= 8{
+            levelClicked += 1
+        }else{
+            levelClicked = 0
+        }
         gameState = .CheckingLevels
         runCheckState()
     }
