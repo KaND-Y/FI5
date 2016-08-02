@@ -125,7 +125,6 @@ class GameScene: SKScene {
         addChild(theLight)
         
         
-        addChild(theArrow)
         
         for circleNumber in 0...numRingCounterForLevel {
             let arrayOfCircleToCreate = arrayOfLevelToPlay[circleNumber]
@@ -138,10 +137,17 @@ class GameScene: SKScene {
             let rotate = SKAction.rotateByAngle(CGFloat(M_PI) / 12, duration: rSpeed / 16)
             let rotateBack = SKAction.rotateByAngle(CGFloat(M_PI) / -12, duration: rSpeed / 16)
             
-            theArrow.position.x = self.frame.width / 2
-            theArrow.position.y = self.frame.height / 2
-            theArrow.zPosition = 1
-            theArrow.alpha = 1.0
+            if circleNumber == 0 {
+                theArrow.position.x = self.frame.width / 2
+                theArrow.position.y = self.frame.height / 2
+                theArrow.zPosition = 1
+                theArrow.alpha = 1.0
+                addChild(theArrow)
+                print("arrow to the knee")
+            }
+            
+            
+            
             
             let theCircle = SKSpriteNode(texture: SKTexture(imageNamed: arrayOfCircleImages[circleNumber]), color: UIColor.blueColor(), size: CGSize(width: 350, height: 350))
             let theNib = SKSpriteNode(texture: SKTexture(imageNamed:arrayOfNibImages[circleNumber]), color: UIColor.blueColor(), size: CGSize(width: 350, height: 350))
@@ -180,18 +186,19 @@ class GameScene: SKScene {
             let repeatLoopOne = SKAction.repeatActionForever(seqOne)
             let seqTwo = SKAction.sequence([rotateBack, updateDegreeCounter])
             let repeatLoopTwo = SKAction.repeatActionForever(seqTwo)
-            
+            let anotherLoopOne = SKAction.repeatActionForever(rotate)
+            let anotherLoopTwo = SKAction.repeatActionForever(rotateBack)
             
             
             if arrayOfCircleToCreate.sMoves == 1{
                 sprite.runAction(repeatLoopOne)
                 if sprite.name == "theCircle0"{
-                    theArrow.runAction(repeatLoopOne)
+                    theArrow.runAction(anotherLoopOne)
                 }
             }else{
                 sprite.runAction(repeatLoopTwo)
                 if sprite.name == "theCircle0"{
-                    theArrow.runAction(repeatLoopTwo)
+                    theArrow.runAction(anotherLoopTwo)
                 }
             }
         }
@@ -226,18 +233,18 @@ class GameScene: SKScene {
                 self.ARRT = 12 - ringRotTwo! % 12
             }
            // print(RotationDict)
+
             print(" does \(ARRO) almost == \(ARRT) ?")
-            if ARRO == ARRT || ARRO + 1 == ARRT || ARRO - 1 == ARRT || ARRO + 2 == ARRT || ARRO - 2 == ARRT{
+            if ARRO == ARRT || ARRO + 1 == ARRT || ARRO - 1 == ARRT {
                 print("YES")
                 winCount += 1
             }else{
                 print("NO")
             }
-            print(numRingCounterForLevel)
-            print(winCount)
             
         }
-        if winCount == numRingCounterForLevel{
+        if numRingCounterForLevel - winCount == 0 {
+            print("\(winCount) won out of \(numRingCounterForLevel)")
             print("WE WON!!!")
             winCount = 0
             if 0 <= levelClicked && levelClicked <= 9{
@@ -247,8 +254,8 @@ class GameScene: SKScene {
             }
             gameIsEnded()
         }else{
+            print("\(winCount) won out of \(numRingCounterForLevel)")
             print("better luck next time")
-            winCount = 0
             gameState = .GameOver
             runCheckState()
         }
@@ -300,7 +307,6 @@ class GameScene: SKScene {
     func weAreOnThePlayGamePage(){
         print("we are on the \(gameState) page")
         //testLevel()
-        RotationDict = [:]
         loadGameLevelSelected()
         
         addChild(pauseButton)
@@ -477,8 +483,11 @@ class GameScene: SKScene {
             
             let sprite = CurrentSpriteData["theCircle\(circleNumber)"]
             sprite!.removeFromParent()
+            if sprite == CurrentSpriteData["theCircle0"] {
+                print("arrow removed from knee")
+                theArrow.removeFromParent()
+            }
         }
-        self.theArrow.removeFromParent()
         
         //circleOne.removeFromParent()
         //circleTwo.removeFromParent()
@@ -531,7 +540,7 @@ class GameScene: SKScene {
         } else {
             self.RotationDict[currentCircleNum] = 1
         }
-        //print("\(currentCircleNum) and \n \(RotationDict)")
+        //print("\(currentCircleNum) and \(RotationDict)")
     }
     
     func backgroundSetup(){
@@ -720,17 +729,19 @@ class GameScene: SKScene {
                         let repeatLoopOne = SKAction.repeatActionForever(seqOne)
                         let seqTwo = SKAction.sequence([rotateBack, updateDegreeCounter])
                         let repeatLoopTwo = SKAction.repeatActionForever(seqTwo)
+                        let anotherLoopOne = SKAction.repeatActionForever(rotate)
+                        let anotherLoopTwo = SKAction.repeatActionForever(rotateBack)
                         
                         
                         if arrayOfCircleToCreate.sMoves == 1{
                             sprite!.runAction(repeatLoopOne)
                             if sprite!.name == "theCircle0"{
-                                theArrow.runAction(repeatLoopOne)
+                                theArrow.runAction(anotherLoopOne)
                             }
                         }else{
                             sprite!.runAction(repeatLoopTwo)
                             if sprite!.name == "theCircle0"{
-                                theArrow.runAction(repeatLoopTwo)
+                                theArrow.runAction(anotherLoopTwo)
                             }
                         }
                     }
