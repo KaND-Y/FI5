@@ -52,8 +52,7 @@ class GameScene: SKScene {
     let levelButton = SKSpriteNode(texture: SKTexture(imageNamed: "LButton"), color: UIColor.blueColor(), size: CGSize(width: 75, height: 35))
     let anotherLevelButton = SKSpriteNode(color: UIColor.blueColor(), size: CGSize(width: 20, height: 250))
     
-    let theArrow = SKSpriteNode(texture: SKTexture(imageNamed: "daArrow"), color: UIColor.blueColor(), size: CGSize(width: 350, height: 350))
-    
+    var theArrow: SKSpriteNode!
     
     let arrayOfCircleImages = ["blackRingSetOne", "blackRingSetTwo", "blackRingSetThree", "blackRingSetFour", "blackRingSetFive"]
     let arrayOfNibImages = ["blackNibSetOne", "blackNibSetTwo", "blackNibSetThree", "blackNibSetFour", "blackNibSetFive"]
@@ -116,6 +115,8 @@ class GameScene: SKScene {
         //print("\(arrayOfLevelToPlay) is the different circles (with their perameters) for this level")
         self.numRingCounterForLevel = arrayOfLevelToPlay.count - 1
         self.ringsLeftSpinning = numRingCounterForLevel
+        theArrow = SKSpriteNode(texture: SKTexture(imageNamed: "daArrow"), color: UIColor.blueColor(), size: CGSize(width: 350, height: 350))
+        
         
         let theLight = SKSpriteNode(texture: SKTexture(imageNamed: "blackLight"), color: UIColor.blueColor(), size: CGSize(width: 350, height: 350))
         theLight.position.x = self.frame.width / 2
@@ -136,6 +137,7 @@ class GameScene: SKScene {
             let rSpeed = Double(rSpeedIs)
             let rotate = SKAction.rotateByAngle(CGFloat(M_PI) / 12, duration: rSpeed / 16)
             let rotateBack = SKAction.rotateByAngle(CGFloat(M_PI) / -12, duration: rSpeed / 16)
+            
             
             if circleNumber == 0 {
                 theArrow.position.x = self.frame.width / 2
