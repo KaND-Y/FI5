@@ -46,11 +46,13 @@ class GameScene: SKScene {
     var backgroundSFX: AVAudioPlayer!
     let clickSound = SKAction.playSoundFileNamed("lockMeTwo", waitForCompletion: false)
     
-    let pauseButton = SKSpriteNode(texture: SKTexture(imageNamed: "PButton"), color: UIColor.blueColor(), size: CGSize(width: 75, height: 35))
-    let homeButton = SKSpriteNode(texture: SKTexture(imageNamed: "HButton"), color: UIColor.blueColor(), size: CGSize(width: 75, height: 35))
-    let playButton = SKSpriteNode(texture: SKTexture(imageNamed: "PLButton"), color: UIColor.blueColor(), size: CGSize(width: 75, height: 35))
-    let levelButton = SKSpriteNode(texture: SKTexture(imageNamed: "LButton"), color: UIColor.blueColor(), size: CGSize(width: 75, height: 35))
-    let anotherLevelButton = SKSpriteNode(color: UIColor.blueColor(), size: CGSize(width: 20, height: 250))
+    let pauseButton = SKSpriteNode(texture: SKTexture(imageNamed: "PButton"), color: UIColor.blueColor(), size: CGSize(width: 100, height: 50))
+    let homeButton = SKSpriteNode(texture: SKTexture(imageNamed: "HButton"), color: UIColor.blueColor(), size: CGSize(width: 100, height: 50))
+    let playButton = SKSpriteNode(texture: SKTexture(imageNamed: "PLButton"), color: UIColor.blueColor(), size: CGSize(width: 100, height: 50))
+    let levelButton = SKSpriteNode(texture: SKTexture(imageNamed: "LButton"), color: UIColor.blueColor(), size: CGSize(width: 100, height: 50))
+    let anotherLevelButton = SKSpriteNode(texture: SKTexture(imageNamed: "AnoB"), color: UIColor.blueColor(), size: CGSize(width: 60, height: 350))
+    
+    //SKSpriteNode(color: UIColor.blueColor(), size: CGSize(width: 60, height: 350))
     
     var theArrow: SKSpriteNode!
     
@@ -91,19 +93,19 @@ class GameScene: SKScene {
         audioSetUp()
         backgroundSetup()
         
-        levelButton.position.x = view.frame.width / 2
+        levelButton.position.x = view.frame.width * (4 / 5)
         levelButton.position.y = view.frame.height * (1 / 8)
         levelButton.zPosition = 4
-        anotherLevelButton.position.x = view.frame.width / 8
+        anotherLevelButton.position.x = view.frame.width / 5
         anotherLevelButton.position.y = view.frame.height / 2
-        anotherLevelButton.zPosition = 4
-        pauseButton.position.x = view.frame.width * (7 / 8)
+        anotherLevelButton.zPosition = 3
+        pauseButton.position.x = view.frame.width * (4 / 5)
         pauseButton.position.y = view.frame.height * (7 / 8)
         pauseButton.zPosition = 4
         playButton.position.x = view.frame.width / 2
-        playButton.position.y = view.frame.height / 2
+        playButton.position.y = view.frame.height * (7 / 12)
         playButton.zPosition = 4
-        homeButton.position.x = view.frame.width / 8
+        homeButton.position.x = view.frame.width / 5
         homeButton.position.y = view.frame.height * (1 / 8)
         homeButton.zPosition = 4
         
@@ -225,7 +227,7 @@ class GameScene: SKScene {
             
             let pMoveOne = currentCircle.sMoves
             let pMoveTwo = nextCircle.sMoves
-            print("\(ringRotOne) next \(ringRotTwo)")
+           // print("\(ringRotOne) next \(ringRotTwo)")
             if pMoveOne == 1{
                 self.ARRO = ringRotOne! % 12
             }else{
@@ -485,7 +487,6 @@ class GameScene: SKScene {
             let sprite = CurrentSpriteData["theCircle\(circleNumber)"]
             sprite!.removeFromParent()
             if sprite == CurrentSpriteData["theCircle0"] {
-                print("arrow removed from knee")
                 theArrow.removeFromParent()
             }
         }
@@ -497,9 +498,9 @@ class GameScene: SKScene {
     }
     
     func winAnimation(){
-        ///asdf
+       // asdf
         
-        print("run arrow anims")
+       
         let arrowForward = SKAction.resizeToHeight(500, duration: 8.0)
          theArrow.runAction(arrowForward)
     }
@@ -526,7 +527,7 @@ class GameScene: SKScene {
                 //put code here
             }
         }
-    } 
+    }
     
     func audioSetUp(){
         let path = NSBundle.mainBundle().pathForResource("fromInside", ofType:".caf")!
@@ -572,11 +573,12 @@ class GameScene: SKScene {
         for numyea in 1...5{
             let rotateyea = SKAction.rotateByAngle(CGFloat(M_PI) / 2, duration: Double(numyea) )
             let foreveryea = SKAction.repeatActionForever(rotateyea)
-            let circYea = SKSpriteNode(texture: SKTexture(imageNamed: "backCirc_\(numyea)"), color: UIColor.blueColor(), size: CGSize(width: 700, height: 700))
+            let circYea = SKSpriteNode(texture: SKTexture(imageNamed: "backCirc_\(numyea)"), color: UIColor.blueColor(), size: CGSize(width: 500, height: 500))
             circYea.position.x = self.frame.width / 2
             circYea.position.y = self.frame.height / 2
-            circYea.zPosition = 1
-            circYea.alpha = 0.1
+            circYea.zPosition =  0 - 1
+            circYea.alpha = 0.5
+            print("the alpha = \(circYea.alpha)")
             print(numyea)
             addChild(circYea)
             circYea.runAction(foreveryea)
@@ -631,7 +633,6 @@ class GameScene: SKScene {
                     //circleOne.removeAllActions()
                     //circleTwo.removeAllActions()
                     backgroundSFX.volume = 0.2
-                    print("game has been paused and current rotations equal ************** ")
                     
                     weAreLeavingThePlayGamePage()
                     
@@ -777,7 +778,6 @@ class GameScene: SKScene {
                     counter = 0
                     
                     addChild(pauseButton)
-                    print("game has become un-paused")
                     
                     weAreLeavingThePausePage()
                     
