@@ -497,7 +497,7 @@ class GameScene: SKScene {
     }
     
     func winAnimation(){
-        asdf
+        ///asdf
         
         print("run arrow anims")
         let arrowForward = SKAction.resizeToHeight(500, duration: 8.0)
@@ -526,7 +526,7 @@ class GameScene: SKScene {
                 //put code here
             }
         }
-    }
+    } 
     
     func audioSetUp(){
         let path = NSBundle.mainBundle().pathForResource("fromInside", ofType:".caf")!
@@ -569,7 +569,19 @@ class GameScene: SKScene {
     }
     func createBackgroundAnimation(){
         //3 items in background constantly spinning at same rate images are
-        print("dont forget to add/create game animation here")
+        for numyea in 1...5{
+            let rotateyea = SKAction.rotateByAngle(CGFloat(M_PI) / 2, duration: Double(numyea) )
+            let foreveryea = SKAction.repeatActionForever(rotateyea)
+            let circYea = SKSpriteNode(texture: SKTexture(imageNamed: "backCirc_\(numyea)"), color: UIColor.blueColor(), size: CGSize(width: 700, height: 700))
+            circYea.position.x = self.frame.width / 2
+            circYea.position.y = self.frame.height / 2
+            circYea.zPosition = 1
+            circYea.alpha = 0.1
+            print(numyea)
+            addChild(circYea)
+            circYea.runAction(foreveryea)
+            
+        }
     }
     
     func NeverRunThis(){
