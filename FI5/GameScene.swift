@@ -251,6 +251,7 @@ class GameScene: SKScene {
             print("\(winCount) won out of \(numRingCounterForLevel)")
             print("WE WON!!!")
             winCount = 0
+            winAnimation()
             gameIsEnded()
         }else{
             print("\(winCount) won out of \(numRingCounterForLevel)")
@@ -488,12 +489,19 @@ class GameScene: SKScene {
                 theArrow.removeFromParent()
             }
         }
-        
-        //circleOne.removeFromParent()
+                 //circleOne.removeFromParent()
         //circleTwo.removeFromParent()
         counter = 0
         RotationDict = [:]
         print("game progress deleted")
+    }
+    
+    func winAnimation(){
+        asdf
+        
+        print("run arrow anims")
+        let arrowForward = SKAction.resizeToHeight(500, duration: 8.0)
+         theArrow.runAction(arrowForward)
     }
     
     func gameIsEnded(){
