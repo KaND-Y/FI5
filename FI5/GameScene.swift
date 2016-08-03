@@ -51,8 +51,8 @@ class GameScene: SKScene {
     let playButton = SKSpriteNode(texture: SKTexture(imageNamed: "PLButton"), color: UIColor.blueColor(), size: CGSize(width: 100, height: 50))
     let levelButton = SKSpriteNode(texture: SKTexture(imageNamed: "LButton"), color: UIColor.blueColor(), size: CGSize(width: 100, height: 50))
     let anotherLevelButton = SKSpriteNode(texture: SKTexture(imageNamed: "AnoB"), color: UIColor.blueColor(), size: CGSize(width: 60, height: 350))
-    
-    //SKSpriteNode(color: UIColor.blueColor(), size: CGSize(width: 60, height: 350))
+   
+    let titleTXT = SKSpriteNode(texture: SKTexture(imageNamed: "titleYea"), color: UIColor.blueColor(), size: CGSize(width: 300, height: 120))
     
     var theArrow: SKSpriteNode!
     
@@ -109,6 +109,9 @@ class GameScene: SKScene {
         homeButton.position.y = view.frame.height * (1 / 8)
         homeButton.zPosition = 4
         
+        titleTXT.position.x = view.frame.width / 2
+        titleTXT.position.y = view.frame.height * (7 / 8)
+        titleTXT.zPosition = 4
         runCheckState()
     }
     
@@ -301,6 +304,7 @@ class GameScene: SKScene {
     func weAreOnTheHomePage(){
         print("we are on the \(gameState) page")
         addChild(levelButton)
+        addChild(titleTXT)
     }
     
     func weAreLeavingTheHomePage(){
@@ -559,6 +563,7 @@ class GameScene: SKScene {
         //print("\(currentCircleNum) and \(RotationDict)")
     }
     
+    
     func backgroundSetup(){
         backgroundScreen = SKSpriteNode(texture: SKTexture(imageNamed:"backgroundSetTwo"), color: UIColor.whiteColor().colorWithAlphaComponent(0.5), size: CGSize(width: view!.frame.width * 3.5, height: view!.frame.height * 2))
         backgroundScreen.alpha = 0.04
@@ -577,8 +582,8 @@ class GameScene: SKScene {
             circYea.position.x = self.frame.width / 2
             circYea.position.y = self.frame.height / 2
             circYea.zPosition =  0 - 1
-            circYea.alpha = 0.5
-            print("the alpha = \(circYea.alpha)")
+            circYea.alpha = 0.22
+            
             print(numyea)
             addChild(circYea)
             circYea.runAction(foreveryea)
