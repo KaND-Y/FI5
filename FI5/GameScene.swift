@@ -57,8 +57,10 @@ class GameScene: SKScene {
     let levelButton = SKSpriteNode(texture: SKTexture(imageNamed: "LButton"), color: UIColor.blueColor(), size: CGSize(width: 100, height: 50))
     let anotherLevelButton = SKSpriteNode(texture: SKTexture(imageNamed: "AnoB"), color: UIColor.blueColor(), size: CGSize(width: 60, height: 350))
     
-    let titleTXT = SKSpriteNode(texture: SKTexture(imageNamed: "titleYea"), color: UIColor.blueColor(), size: CGSize(width: 300, height: 120))
+    let pickMe = SKSpriteNode(texture: SKTexture(imageNamed: "pick"), color: UIColor.blueColor(), size: CGSize(width: 60, height: 20))
+
     
+    let titleTXT = SKSpriteNode(texture: SKTexture(imageNamed: "titleYea"), color: UIColor.blueColor(), size: CGSize(width: 300, height: 120))
     var theArrow: SKSpriteNode!
     
     let arrayOfCircleImages = ["blackRingSetOne", "blackRingSetTwo", "blackRingSetThree", "blackRingSetFour", "blackRingSetFive"]
@@ -342,12 +344,18 @@ class GameScene: SKScene {
         addChild(playButton)
         addChild(anotherLevelButton)
         createBackgroundAnimation()
+        pickMe.position.x = self.frame.width / 4
+        pickMe.position.y = self.frame.height / 2
+        pickMe.zPosition = 2
+       // theLight.alpha = 1.0
+        addChild(pickMe)
     }
     
     func weAreLeavingtheCheckingLevelsPage(){
         homeButton.removeFromParent()
         playButton.removeFromParent()
         anotherLevelButton.removeFromParent()
+        pickMe.removeFromParent()
     }
     
     func weAreOnTheGameOverPage(){
