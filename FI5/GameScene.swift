@@ -570,6 +570,7 @@ class GameScene: SKScene {
         backgroundScreen.position.x = view!.frame.width / 2
         backgroundScreen.position.y = view!.frame.height / 2
         backgroundScreen.zPosition = -4
+        
         addChild(backgroundScreen)
         createBackgroundAnimation()
     }
@@ -638,7 +639,7 @@ class GameScene: SKScene {
                     //circleOne.removeAllActions()
                     //circleTwo.removeAllActions()
                     backgroundSFX.volume = 0.2
-                    
+    
                     weAreLeavingThePlayGamePage()
                     
                     gameState = .Pause
