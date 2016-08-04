@@ -37,6 +37,11 @@ class GameScene: SKScene {
     var circleTwo: SKSpriteNode!
     var theCircle: SKSpriteNode!
     
+    var circSi = 500
+    var wantToEnd = false
+    let bCircYea = SKSpriteNode(color: UIColor.clearColor(), size: CGSize(width: 0, height: 0))
+    
+    
     var rotateForever: SKAction!
     var rotatecircleTwoForever: SKAction!
     
@@ -51,7 +56,7 @@ class GameScene: SKScene {
     let playButton = SKSpriteNode(texture: SKTexture(imageNamed: "PLButton"), color: UIColor.blueColor(), size: CGSize(width: 100, height: 50))
     let levelButton = SKSpriteNode(texture: SKTexture(imageNamed: "LButton"), color: UIColor.blueColor(), size: CGSize(width: 100, height: 50))
     let anotherLevelButton = SKSpriteNode(texture: SKTexture(imageNamed: "AnoB"), color: UIColor.blueColor(), size: CGSize(width: 60, height: 350))
-   
+    
     let titleTXT = SKSpriteNode(texture: SKTexture(imageNamed: "titleYea"), color: UIColor.blueColor(), size: CGSize(width: 300, height: 120))
     
     var theArrow: SKSpriteNode!
@@ -219,10 +224,10 @@ class GameScene: SKScene {
             let ringRotOne = self.RotationDict["currentCircleNum_\(ring)"]
             let ringRotTwo = self.RotationDict["currentCircleNum_\(ring + 1)"]
             
-//            if ringRotOne == self.RotationDict["currentCircleNum_0"]{
-//                let newCurNum = self.RotationDict["currentCircleNum_0"]! / 2
-//                self.RotationDict["currentCircleNum_0"] = newCurNum
-//            }
+            //            if ringRotOne == self.RotationDict["currentCircleNum_0"]{
+            //                let newCurNum = self.RotationDict["currentCircleNum_0"]! / 2
+            //                self.RotationDict["currentCircleNum_0"] = newCurNum
+            //            }
             
             let arrayOfCircles = Levels.infoForLevels[levelClicked]
             let currentCircle = arrayOfCircles[ring]
@@ -230,7 +235,7 @@ class GameScene: SKScene {
             
             let pMoveOne = currentCircle.sMoves
             let pMoveTwo = nextCircle.sMoves
-           // print("\(ringRotOne) next \(ringRotTwo)")
+            // print("\(ringRotOne) next \(ringRotTwo)")
             if pMoveOne == 1{
                 self.ARRO = ringRotOne! % 12
             }else{
@@ -241,8 +246,8 @@ class GameScene: SKScene {
             }else{
                 self.ARRT = 12 - ringRotTwo! % 12
             }
-           // print(RotationDict)
-
+            // print(RotationDict)
+            
             print(" does \(ARRO) almost == \(ARRT) ?")
             if ARRO == ARRT || ARRO + 1 == ARRT || ARRO - 1 == ARRT {
                 print("YES")
@@ -305,18 +310,24 @@ class GameScene: SKScene {
         print("we are on the \(gameState) page")
         addChild(levelButton)
         addChild(titleTXT)
+        createBackgroundAnimation()
+        
+        
     }
     
     func weAreLeavingTheHomePage(){
         levelButton.removeFromParent()
+        titleTXT.removeFromParent()
+        
+        
     }
     
     func weAreOnThePlayGamePage(){
         print("we are on the \(gameState) page")
         //testLevel()
         loadGameLevelSelected()
-        
         addChild(pauseButton)
+        createBackgroundAnimation()
     }
     
     func weAreLeavingThePlayGamePage(){
@@ -330,6 +341,7 @@ class GameScene: SKScene {
         addChild(homeButton)
         addChild(playButton)
         addChild(anotherLevelButton)
+        createBackgroundAnimation()
     }
     
     func weAreLeavingtheCheckingLevelsPage(){
@@ -345,7 +357,7 @@ class GameScene: SKScene {
         addChild(playButton)
         addChild(homeButton)
         addChild(levelButton)
-        
+        createBackgroundAnimation()
         
     }
     
@@ -367,6 +379,7 @@ class GameScene: SKScene {
         addChild(playButton)
         addChild(levelButton)
         addChild(homeButton)
+        createBackgroundAnimation()
         
         //////////////////////////////////////////
         // data needed to also check win state  //
@@ -383,6 +396,8 @@ class GameScene: SKScene {
     func weAreOntheCheckingWinOrLosePage(){
         print("we are on the \(gameState) page")
         checkWinOrLose()
+        
+        
     }
     
     ////////////////////////////////////////////////////////////////////////////////
@@ -494,7 +509,7 @@ class GameScene: SKScene {
                 theArrow.removeFromParent()
             }
         }
-                 //circleOne.removeFromParent()
+        //circleOne.removeFromParent()
         //circleTwo.removeFromParent()
         counter = 0
         RotationDict = [:]
@@ -502,11 +517,11 @@ class GameScene: SKScene {
     }
     
     func winAnimation(){
-       // asdf
+        // asdf
         
-       
+        
         let arrowForward = SKAction.resizeToHeight(500, duration: 8.0)
-         theArrow.runAction(arrowForward)
+        theArrow.runAction(arrowForward)
     }
     
     func gameIsEnded(){
@@ -552,6 +567,10 @@ class GameScene: SKScene {
         backgroundSFX.volume = 1.0
         loaderScreen.removeFromParent()
         print("values are reset")
+        
+      //bc pause does not recheck gamestate and background anim needs to be relocated (createbackgroundanimation)
+        bCircYea.position.x = self.frame.width / 2
+        bCircYea.position.y =  0
     }
     
     func incrementCircle(currentCircleNum : String) {
@@ -570,26 +589,55 @@ class GameScene: SKScene {
         backgroundScreen.position.x = view!.frame.width / 2
         backgroundScreen.position.y = view!.frame.height / 2
         backgroundScreen.zPosition = -4
-        
         addChild(backgroundScreen)
-        createBackgroundAnimation()
+        morebackset()
+      
     }
-    func createBackgroundAnimation(){
-        //3 items in background constantly spinning at same rate images are
+    
+    func morebackset(){
+        addChild(self.bCircYea)
+        
+        self.bCircYea.zPosition =  0 - 1
+        
         for numyea in 1...5{
             let rotateyea = SKAction.rotateByAngle(CGFloat(M_PI) / 2, duration: Double(numyea) )
             let foreveryea = SKAction.repeatActionForever(rotateyea)
-            let circYea = SKSpriteNode(texture: SKTexture(imageNamed: "backCirc_\(numyea)"), color: UIColor.blueColor(), size: CGSize(width: 500, height: 500))
-            circYea.position.x = self.frame.width / 2
-            circYea.position.y = self.frame.height / 2
+            let circYea = SKSpriteNode(texture: SKTexture(imageNamed: "backCirc_\(numyea)"), color: UIColor.blueColor(), size: CGSize(width: circSi, height: circSi))
+            circYea.position.x = bCircYea.frame.width / 2
+            circYea.position.y = bCircYea.frame.height / 2
+            
+            circYea.anchorPoint = CGPointMake(0.5,0.5)
+            
             circYea.zPosition =  0 - 1
             circYea.alpha = 0.22
             
-            print(numyea)
-            addChild(circYea)
+            print("background \(numyea)")
+            bCircYea.addChild(circYea)
             circYea.runAction(foreveryea)
-            
         }
+   
+    }
+    
+    func createBackgroundAnimation(){
+       
+            if gameState == .Home{
+                bCircYea.position.x = self.frame.width / 2
+                bCircYea.position.y = self.frame.height / 2
+            }else if gameState == .PlayGame || gameState == .GameOver{
+                bCircYea.position.x = self.frame.width / 2
+                bCircYea.position.y =  0
+            }else if gameState == .Pause {
+                bCircYea.position.x = self.frame.width / 2
+                bCircYea.position.y =  self.frame.height
+            }else if gameState == .CheckingLevels{
+                bCircYea.position.x = self.frame.width * (5 / 6)
+                bCircYea.position.y =  self.frame.height * (5 / 6)
+            }else{
+                bCircYea.position.x = self.frame.width * 2
+                bCircYea.position.y =  self.frame.height * 2
+            }
+        
+    
     }
     
     func NeverRunThis(){
@@ -634,12 +682,12 @@ class GameScene: SKScene {
                         
                         sprite!.removeAllActions()
                     }
-                        theArrow.removeAllActions()
+                    theArrow.removeAllActions()
                     
                     //circleOne.removeAllActions()
                     //circleTwo.removeAllActions()
                     backgroundSFX.volume = 0.2
-    
+                    
                     weAreLeavingThePlayGamePage()
                     
                     gameState = .Pause
@@ -656,7 +704,7 @@ class GameScene: SKScene {
                     
                     
                     if numRingCounterForLevel == ringsLeftSpinning {
-                            theArrow.removeAllActions()
+                        theArrow.removeAllActions()
                     }
                     ringsLeftSpinning -= 1
                     if ringsLeftSpinning <= -1 {
