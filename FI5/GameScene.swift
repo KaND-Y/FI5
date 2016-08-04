@@ -128,7 +128,7 @@ class GameScene: SKScene {
         theArrow = SKSpriteNode(texture: SKTexture(imageNamed: "daArrow"), color: UIColor.blueColor(), size: CGSize(width: 350, height: 350))
         
         
-        let theLight = SKSpriteNode(texture: SKTexture(imageNamed: "blackLight"), color: UIColor.blueColor(), size: CGSize(width: 350, height: 350))
+        let theLight = SKSpriteNode(texture: SKTexture(imageNamed: "blackLight"), color: UIColor.blueColor(), size: CGSize(width: 50, height: 50))
         theLight.position.x = self.frame.width / 2
         theLight.position.y = self.frame.height / 2
         theLight.zPosition = 1

@@ -11,7 +11,6 @@
 		B370CFA41D4BE9D300BE3B1C /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = B370CFA31D4BE9D300BE3B1C /* GameScene.swift */; };
 		B370CFA61D4BE9D300BE3B1C /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B370CFA51D4BE9D300BE3B1C /* GameViewController.swift */; };
 		B370CFA91D4BE9D300BE3B1C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B370CFA71D4BE9D300BE3B1C /* Main.storyboard */; };
-		B370CFAB1D4BE9D300BE3B1C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B370CFAA1D4BE9D300BE3B1C /* Assets.xcassets */; };
 		B370CFAE1D4BE9D300BE3B1C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B370CFAC1D4BE9D300BE3B1C /* LaunchScreen.storyboard */; };
 		B370CFB91D4BE9D300BE3B1C /* FI5Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B370CFB81D4BE9D300BE3B1C /* FI5Tests.swift */; };
 		B370CFC41D4BE9D400BE3B1C /* FI5UITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B370CFC31D4BE9D400BE3B1C /* FI5UITests.swift */; };
@@ -19,6 +18,7 @@
 		B370CFD71D4BEA5C00BE3B1C /* fromInside.caf in Resources */ = {isa = PBXBuildFile; fileRef = B370CFD41D4BEA5C00BE3B1C /* fromInside.caf */; };
 		B370CFD81D4BEA5C00BE3B1C /* lockMe.caf in Resources */ = {isa = PBXBuildFile; fileRef = B370CFD51D4BEA5C00BE3B1C /* lockMe.caf */; };
 		B370CFD91D4BEA5C00BE3B1C /* lockMeTwo.caf in Resources */ = {isa = PBXBuildFile; fileRef = B370CFD61D4BEA5C00BE3B1C /* lockMeTwo.caf */; };
+		B3FCA5961D53C4300053F77F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B3FCA5951D53C4300053F77F /* Assets.xcassets */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -44,7 +44,6 @@
 		B370CFA31D4BE9D300BE3B1C /* GameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; };
 		B370CFA51D4BE9D300BE3B1C /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
 		B370CFA81D4BE9D300BE3B1C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		B370CFAA1D4BE9D300BE3B1C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B370CFAD1D4BE9D300BE3B1C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B370CFAF1D4BE9D300BE3B1C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B370CFB41D4BE9D300BE3B1C /* FI5Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FI5Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -57,6 +56,7 @@
 		B370CFD41D4BEA5C00BE3B1C /* fromInside.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = fromInside.caf; sourceTree = "<group>"; };
 		B370CFD51D4BEA5C00BE3B1C /* lockMe.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = lockMe.caf; sourceTree = "<group>"; };
 		B370CFD61D4BEA5C00BE3B1C /* lockMeTwo.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = lockMeTwo.caf; sourceTree = "<group>"; };
+		B3FCA5951D53C4300053F77F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -112,7 +112,7 @@
 				B370CFD11D4BEA1600BE3B1C /* Levels.swift */,
 				B370CFA51D4BE9D300BE3B1C /* GameViewController.swift */,
 				B370CFA71D4BE9D300BE3B1C /* Main.storyboard */,
-				B370CFAA1D4BE9D300BE3B1C /* Assets.xcassets */,
+				B3FCA5951D53C4300053F77F /* Assets.xcassets */,
 				B370CFD31D4BEA5C00BE3B1C /* SFX */,
 				B370CFAC1D4BE9D300BE3B1C /* LaunchScreen.storyboard */,
 				B370CFAF1D4BE9D300BE3B1C /* Info.plist */,
@@ -254,10 +254,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				B370CFAE1D4BE9D300BE3B1C /* LaunchScreen.storyboard in Resources */,
-				B370CFAB1D4BE9D300BE3B1C /* Assets.xcassets in Resources */,
 				B370CFD71D4BEA5C00BE3B1C /* fromInside.caf in Resources */,
 				B370CFD81D4BEA5C00BE3B1C /* lockMe.caf in Resources */,
 				B370CFD91D4BEA5C00BE3B1C /* lockMeTwo.caf in Resources */,
+				B3FCA5961D53C4300053F77F /* Assets.xcassets in Resources */,
 				B370CFA91D4BE9D300BE3B1C /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
