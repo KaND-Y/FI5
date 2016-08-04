@@ -344,7 +344,7 @@ class GameScene: SKScene {
         addChild(playButton)
         addChild(anotherLevelButton)
         createBackgroundAnimation()
-        pickMe.position.x = self.frame.width / 4
+        pickMe.position.x = self.frame.width / 2
         pickMe.position.y = self.frame.height / 2
         pickMe.zPosition = 2
        // theLight.alpha = 1.0
@@ -658,7 +658,82 @@ class GameScene: SKScene {
     
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
         /* Called when a touch begins */
-        
+        if gameState == .Home{
+            
+            for touch: AnyObject in touches {
+                let location = touch.locationInNode(self)
+                if levelButton.containsPoint(location) {
+                    levelButton.texture = SKTexture(imageNamed:"LButtonx")
+                }
+            }
+        }
+        if gameState == .PlayGame{
+
+            for touch: AnyObject in touches {
+                let location = touch.locationInNode(self)
+                if pauseButton.containsPoint(location) {
+                    pauseButton.texture = SKTexture(imageNamed:"PButtonx")
+                }else{
+                
+                }
+            }
+        }
+        else if gameState == .CheckingWinOrLose {
+            return
+            
+        }
+        else if gameState == .GameOver {
+            
+            for touch: AnyObject in touches {
+                let location = touch.locationInNode(self)
+                if homeButton.containsPoint(location) {
+                    homeButton.texture = SKTexture(imageNamed:"HButtonx")
+                }else if levelButton.containsPoint(location) {
+                    levelButton.texture = SKTexture(imageNamed:"LButtonx")
+                } else if playButton.containsPoint(location) {
+                    playButton.texture = SKTexture(imageNamed:"PLButtonx")
+                }
+            }
+        }
+        else if gameState == .CheckingLevels{
+            for touch: AnyObject in touches {
+                let location = touch.locationInNode(self)
+                if homeButton.containsPoint(location) {
+                    homeButton.texture = SKTexture(imageNamed:"HButtonx")
+                }else if playButton.containsPoint(location) {
+                    playButton.texture = SKTexture(imageNamed:"PLButtonx")
+                }else if anotherLevelButton.containsPoint(location) {
+///////////////////////////////////////////////////////////////////////////////////////////asdfasdf
+                }else{
+                    
+                }
+            }
+        }
+    else if gameState == .Pause{
+            
+            //fix bug with circleOne stopping--pause--circleOne moving again
+            for touch: AnyObject in touches {
+                let location = touch.locationInNode(self)
+                if playButton.containsPoint(location) {
+                    playButton.texture = SKTexture(imageNamed:"PLButtonx")
+                }else if homeButton.containsPoint(location) {
+                     homeButton.texture = SKTexture(imageNamed:"HButtonx")
+                }else if levelButton.containsPoint(location) {
+                    levelButton.texture = SKTexture(imageNamed:"LButtonx")
+    
+                }
+            }
+        }
+    }
+
+
+
+    
+    override func touchesMoved(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        //
+    }
+    
+    override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
         if gameState == .Home{
             
             for touch: AnyObject in touches {
@@ -870,15 +945,6 @@ class GameScene: SKScene {
                 }
             }
         }
-    }
-    
-    override func touchesMoved(touches: Set<UITouch>, withEvent event: UIEvent?) {
-        //
-    }
-    
-    override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
-        //
-        
     }
     
     override func touchesCancelled(touches: Set<UITouch>?, withEvent event: UIEvent?) {
