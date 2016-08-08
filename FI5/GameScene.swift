@@ -726,11 +726,86 @@ class GameScene: SKScene {
         }
     }
 
-
-
-    
     override func touchesMoved(touches: Set<UITouch>, withEvent event: UIEvent?) {
-        //
+        //apologies for such redunant code :'(
+        for touch: AnyObject in touches {
+            let location = touch.locationInNode(self)
+          
+            if gameState == .Home{
+                if levelButton.containsPoint(location) {
+                    levelButton.texture = SKTexture(imageNamed:"LButtonx")
+                } else{
+                    levelButton.texture = SKTexture(imageNamed:"LButton")
+                }
+            }
+            if gameState == .PlayGame{
+                if pauseButton.containsPoint(location) {
+                   pauseButton.texture = SKTexture(imageNamed:"PButtonx")
+                } else{
+                   pauseButton.texture = SKTexture(imageNamed:"PButton")
+                }
+            }
+            else if gameState == .CheckingWinOrLose {
+                return
+                
+            }
+            else if gameState == .GameOver {
+                if playButton.containsPoint(location) {
+                    playButton.texture = SKTexture(imageNamed:"PLButtonx")
+                    homeButton.texture = SKTexture(imageNamed:"HButton")
+                    levelButton.texture = SKTexture(imageNamed:"LButton")
+                } else if homeButton.containsPoint(location) {
+                    playButton.texture = SKTexture(imageNamed:"PLButton")
+                    homeButton.texture = SKTexture(imageNamed:"HButtonx")
+                    levelButton.texture = SKTexture(imageNamed:"LButton")
+                } else if levelButton.containsPoint(location) {
+                    playButton.texture = SKTexture(imageNamed:"PLButton")
+                    homeButton.texture = SKTexture(imageNamed:"HButton")
+                    levelButton.texture = SKTexture(imageNamed:"LButtonx")
+                } else{
+                    playButton.texture = SKTexture(imageNamed:"PLButton")
+                    homeButton.texture = SKTexture(imageNamed:"HButton")
+                    levelButton.texture = SKTexture(imageNamed:"LButton")
+                }
+            }
+            else if gameState == .CheckingLevels{
+                if playButton.containsPoint(location) {
+                    playButton.texture = SKTexture(imageNamed:"PLButtonx")
+                    homeButton.texture = SKTexture(imageNamed:"HButton")
+                } else if homeButton.containsPoint(location) {
+                    playButton.texture = SKTexture(imageNamed:"PLButton")
+                    homeButton.texture = SKTexture(imageNamed:"HButtonx")
+                } else if anotherLevelButton.containsPoint(location) {
+                    playButton.texture = SKTexture(imageNamed:"PLButton")
+                    homeButton.texture = SKTexture(imageNamed:"HButton")
+                } else{
+                    playButton.texture = SKTexture(imageNamed:"PLButton")
+                    homeButton.texture = SKTexture(imageNamed:"HButton")
+                }
+            }
+            else if gameState == .Pause{
+                
+                if playButton.containsPoint(location) {
+                    playButton.texture = SKTexture(imageNamed:"PLButtonx")
+                    homeButton.texture = SKTexture(imageNamed:"HButton")
+                    levelButton.texture = SKTexture(imageNamed:"LButton")
+                } else if homeButton.containsPoint(location) {
+                    playButton.texture = SKTexture(imageNamed:"PLButton")
+                    homeButton.texture = SKTexture(imageNamed:"HButtonx")
+                    levelButton.texture = SKTexture(imageNamed:"LButton")
+                } else if levelButton.containsPoint(location) {
+                    playButton.texture = SKTexture(imageNamed:"PLButton")
+                    homeButton.texture = SKTexture(imageNamed:"HButton")
+                    levelButton.texture = SKTexture(imageNamed:"LButtonx")
+                } else{
+                    playButton.texture = SKTexture(imageNamed:"PLButton")
+                    homeButton.texture = SKTexture(imageNamed:"HButton")
+                    levelButton.texture = SKTexture(imageNamed:"LButton")
+                }
+            }
+            
+            
+        }
     }
     
     override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
@@ -739,6 +814,7 @@ class GameScene: SKScene {
             for touch: AnyObject in touches {
                 let location = touch.locationInNode(self)
                 if levelButton.containsPoint(location) {
+                    levelButton.texture = SKTexture(imageNamed:"LButton")
                     
                     weAreLeavingTheHomePage()
                     
@@ -770,12 +846,12 @@ class GameScene: SKScene {
                     //circleOne.removeAllActions()
                     //circleTwo.removeAllActions()
                     backgroundSFX.volume = 0.2
+                    pauseButton.texture = SKTexture(imageNamed:"PButton")
                     
                     weAreLeavingThePlayGamePage()
                     
                     gameState = .Pause
                     runCheckState()
-                    
                 }else{
                     self.runAction(clickSound)
                     // testTouch()
@@ -806,6 +882,7 @@ class GameScene: SKScene {
             for touch: AnyObject in touches {
                 let location = touch.locationInNode(self)
                 if homeButton.containsPoint(location) {
+                    homeButton.texture = SKTexture(imageNamed:"HButton")
                     
                     weAreLeavingTheGameOverPage()
                     
@@ -813,6 +890,7 @@ class GameScene: SKScene {
                     runCheckState()
                     
                 }else if levelButton.containsPoint(location) {
+                    levelButton.texture = SKTexture(imageNamed:"LButton")
                     
                     weAreLeavingTheGameOverPage()
                     
@@ -820,6 +898,7 @@ class GameScene: SKScene {
                     runCheckState()
                     
                 } else if playButton.containsPoint(location) {
+                    playButton.texture = SKTexture(imageNamed:"PLButton")
                     
                     weAreLeavingTheGameOverPage()
                     
@@ -832,6 +911,7 @@ class GameScene: SKScene {
             for touch: AnyObject in touches {
                 let location = touch.locationInNode(self)
                 if homeButton.containsPoint(location) {
+                    homeButton.texture = SKTexture(imageNamed:"HButton")
                     
                     weAreLeavingtheCheckingLevelsPage()
                     
@@ -839,6 +919,7 @@ class GameScene: SKScene {
                     runCheckState()
                     
                 }else if playButton.containsPoint(location) {
+                    playButton.texture = SKTexture(imageNamed:"PLButton")
                     
                     weAreLeavingtheCheckingLevelsPage()
                     
@@ -869,6 +950,7 @@ class GameScene: SKScene {
             for touch: AnyObject in touches {
                 let location = touch.locationInNode(self)
                 if playButton.containsPoint(location) {
+                    playButton.texture = SKTexture(imageNamed:"PLButton")
                     
                     let arrayOfLevelToPlay = Levels.infoForLevels[levelClicked]
                     self.numRingCounterForLevel = arrayOfLevelToPlay.count - 1
@@ -924,7 +1006,7 @@ class GameScene: SKScene {
                     //runCheckState()
                     
                 }else if homeButton.containsPoint(location) {
-                    
+                    homeButton.texture = SKTexture(imageNamed:"HButton")
                     weAreLeavingThePausePage()
                     
                     quitCurrentLevel()
@@ -934,7 +1016,7 @@ class GameScene: SKScene {
                     runCheckState()
                     
                 }else if levelButton.containsPoint(location) {
-                    
+                    levelButton.texture = SKTexture(imageNamed:"LButton")
                     weAreLeavingThePausePage()
                     
                     quitCurrentLevel()
