@@ -41,6 +41,14 @@ class GameScene: SKScene {
     var wantToEnd = false
     let bCircYea = SKSpriteNode(color: UIColor.clearColor(), size: CGSize(width: 0, height: 0))
     
+    let menu0 =  SKSpriteNode(texture: SKTexture(imageNamed: "pau0"), color: UIColor.blueColor(), size: CGSize(width: 500, height: 170))
+    let menu1 =  SKSpriteNode(texture: SKTexture(imageNamed: "pau1"), color: UIColor.blueColor(), size: CGSize(width: 500, height: 170))
+    let menu2 =  SKSpriteNode(texture: SKTexture(imageNamed: "pau2"), color: UIColor.blueColor(), size: CGSize(width: 500, height: 170))
+    let menu3 =  SKSpriteNode(texture: SKTexture(imageNamed: "pau3"), color: UIColor.blueColor(), size: CGSize(width: 500, height: 170))
+    let menu4 =  SKSpriteNode(texture: SKTexture(imageNamed: "pau4"), color: UIColor.blueColor(), size: CGSize(width: 500, height: 170))
+   
+    
+    
     
     var rotateForever: SKAction!
     var rotatecircleTwoForever: SKAction!
@@ -60,7 +68,7 @@ class GameScene: SKScene {
     let pickMe = SKSpriteNode(texture: SKTexture(imageNamed: "pick"), color: UIColor.blueColor(), size: CGSize(width: 60, height: 20))
 
     
-    let titleTXT = SKSpriteNode(texture: SKTexture(imageNamed: "titleYea"), color: UIColor.blueColor(), size: CGSize(width: 300, height: 120))
+    let titleTXT = SKSpriteNode(texture: SKTexture(imageNamed: "titleYea"), color: UIColor.blueColor(), size: CGSize(width: 300, height: 160))
     var theArrow: SKSpriteNode!
     
     let arrayOfCircleImages = ["blackRingSetOne", "blackRingSetTwo", "blackRingSetThree", "blackRingSetFour", "blackRingSetFive"]
@@ -96,6 +104,34 @@ class GameScene: SKScene {
     
     override func didMoveToView(view: SKView) {
         print("startup")
+        addChild(menu0)
+        addChild(menu2)
+        addChild(menu3)
+        addChild(menu4)
+        
+        menu0.position.x = view.frame.width / 2
+        menu0.position.y = view.frame.height * 2
+        //menu1 gets added each time to become visible
+        menu2.position.x = view.frame.width * 2
+        menu2.position.y = view.frame.height / 2
+        menu3.position.x = view.frame.width * (0 - 2)
+        menu3.position.y = view.frame.height / 2
+        menu4.position.x = view.frame.width / 2
+        menu4.position.y = view.frame.height * (0 - 2)
+        
+        menu0.zPosition = 3
+        menu1.zPosition = 3
+        menu2.zPosition = 3
+        menu3.zPosition = 3
+        menu4.zPosition = 3
+        
+        menu0.alpha = 0.75
+        menu1.alpha = 0.75
+        menu2.alpha = 0.75
+        menu3.alpha = 0.75
+        menu4.alpha = 0.75
+
+    
         
         audioSetUp()
         backgroundSetup()
@@ -340,12 +376,14 @@ class GameScene: SKScene {
         print("we are on the \(gameState) page")
         print("You Are On Level \(levelClicked + 1)")
         
+       asdf levelClicked + 1
+        
         addChild(homeButton)
         addChild(playButton)
         addChild(anotherLevelButton)
         createBackgroundAnimation()
-        pickMe.position.x = self.frame.width / 2
-        pickMe.position.y = self.frame.height / 2
+        pickMe.position.x = self.frame.width / 4
+        pickMe.position.y = self.frame.height / 2 - 150
         pickMe.zPosition = 2
        // theLight.alpha = 1.0
         addChild(pickMe)
@@ -377,7 +415,7 @@ class GameScene: SKScene {
     
     func weAreOnThePausePage(){
         print("we are on the \(gameState) page")
-        
+        menuCreation()
         loaderScreen = SKSpriteNode(color: UIColor.whiteColor().colorWithAlphaComponent(0.5), size: CGSize(width: view!.frame.width, height: view!.frame.height))
         loaderScreen.position.x = view!.frame.width / 2
         loaderScreen.position.y = view!.frame.height / 2
@@ -399,6 +437,7 @@ class GameScene: SKScene {
         homeButton.removeFromParent()
         playButton.removeFromParent()
         levelButton.removeFromParent()
+        menuDeletion()
     }
     
     func weAreOntheCheckingWinOrLosePage(){
@@ -501,6 +540,34 @@ class GameScene: SKScene {
     ////////////////////////////////////////////////////////////////////////////////////
     //////////////////////////////  helper functions ///////////////////////////////////
     ////////////////////////////////////////////////////////////////////////////////////
+    
+    func menuCreation(){
+        let menuMove0 = SKAction.moveToX(view!.frame.width / 2, duration: 1 / 3)
+        let menuMove1 = SKAction.moveToY(view!.frame.height * (7 / 12), duration: 1 / 3)
+        menu0.runAction(menuMove0)
+        addChild(menu1)
+        menu2.runAction(menuMove0)
+        menu3.runAction(menuMove0)
+        menu4.runAction(menuMove0)
+        menu0.runAction(menuMove1)
+        menu2.runAction(menuMove1)
+        menu3.runAction(menuMove1)
+        menu4.runAction(menuMove1)
+    }
+    
+    func menuDeletion(){
+        menu0.position.x = view!.frame.width / 2
+        menu0.position.y = view!.frame.height * 2
+        menu1.removeFromParent()
+        menu2.position.x = view!.frame.width * 2
+        menu2.position.y = view!.frame.height / 2
+        menu3.position.x = view!.frame.width * (0 - 2)
+        menu3.position.y = view!.frame.height / 2
+        menu4.position.x = view!.frame.width / 2
+        menu4.position.y = view!.frame.height * (0 - 2)
+        
+
+    }
     
     func quitCurrentLevel(){
         
@@ -926,9 +993,11 @@ class GameScene: SKScene {
                     gameState = .PlayGame
                     runCheckState()
                 }else if anotherLevelButton.containsPoint(location) {
+    //very broken
                     ALBTouch += 1
                     //pickLevel()
                     //testCode 8 levels
+                    adsf
                     if forba == 1{
                         levelClicked += 1
                         print("You Are On Level \(levelClicked + 1)")
