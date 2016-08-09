@@ -47,8 +47,7 @@ class GameScene: SKScene {
     let menu3 =  SKSpriteNode(texture: SKTexture(imageNamed: "pau3"), color: UIColor.blueColor(), size: CGSize(width: 500, height: 170))
     let menu4 =  SKSpriteNode(texture: SKTexture(imageNamed: "pau4"), color: UIColor.blueColor(), size: CGSize(width: 500, height: 170))
    
-    
-    
+    var pixmove: SKAction!
     
     var rotateForever: SKAction!
     var rotatecircleTwoForever: SKAction!
@@ -68,7 +67,7 @@ class GameScene: SKScene {
     let pickMe = SKSpriteNode(texture: SKTexture(imageNamed: "pick"), color: UIColor.blueColor(), size: CGSize(width: 60, height: 20))
 
     
-    let titleTXT = SKSpriteNode(texture: SKTexture(imageNamed: "titleYea"), color: UIColor.blueColor(), size: CGSize(width: 300, height: 160))
+    let titleTXT = SKSpriteNode(texture: SKTexture(imageNamed: "titleYea"), color: UIColor.blueColor(), size: CGSize(width: 300, height: 180))
     var theArrow: SKSpriteNode!
     
     let arrayOfCircleImages = ["blackRingSetOne", "blackRingSetTwo", "blackRingSetThree", "blackRingSetFour", "blackRingSetFive"]
@@ -141,7 +140,7 @@ class GameScene: SKScene {
         levelButton.zPosition = 4
         anotherLevelButton.position.x = view.frame.width / 5
         anotherLevelButton.position.y = view.frame.height / 2
-        anotherLevelButton.zPosition = 3
+        anotherLevelButton.zPosition = 2
         pauseButton.position.x = view.frame.width * (4 / 5)
         pauseButton.position.y = view.frame.height * (7 / 8)
         pauseButton.zPosition = 4
@@ -375,18 +374,21 @@ class GameScene: SKScene {
     func weAreOnTheCheckingLevelsPage(){
         print("we are on the \(gameState) page")
         print("You Are On Level \(levelClicked + 1)")
-        
-       asdf levelClicked + 1
+        let numbPixUp = CGFloat(30 * levelClicked)
+        print("\(numbPixUp)")
+        addChild(pickMe)
+        levelPix()
         
         addChild(homeButton)
         addChild(playButton)
         addChild(anotherLevelButton)
         createBackgroundAnimation()
         pickMe.position.x = self.frame.width / 4
-        pickMe.position.y = self.frame.height / 2 - 150
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////***
+        pickMe.position.y = self.frame.height / 2 - 100
         pickMe.zPosition = 2
        // theLight.alpha = 1.0
-        addChild(pickMe)
+        
     }
     
     func weAreLeavingtheCheckingLevelsPage(){
@@ -541,9 +543,24 @@ class GameScene: SKScene {
     //////////////////////////////  helper functions ///////////////////////////////////
     ////////////////////////////////////////////////////////////////////////////////////
     
+    func levelPix(){
+        if levelClicked == 0{
+            let pixmove = SKAction.moveToY(self.frame.height / 2 - 100, duration: 2)
+        }else if levelClicked <= 8{
+            let numbPixUp = CGFloat(30 * (levelClicked + 1))
+            print("\(numbPixUp)")
+            let  pixmove = SKAction.moveToY(self.frame.height / 2 - 100 + numbPixUp, duration: 2)
+            pickMe.runAction(pixmove)
+        }else{
+            levelClicked = 0
+             let pixmove = SKAction.moveToY(self.frame.height / 2 - 100, duration: 2)
+        }
+        
+    }
+    
     func menuCreation(){
-        let menuMove0 = SKAction.moveToX(view!.frame.width / 2, duration: 1 / 3)
-        let menuMove1 = SKAction.moveToY(view!.frame.height * (7 / 12), duration: 1 / 3)
+        let menuMove0 = SKAction.moveToX(view!.frame.width / 2, duration: 1 / 2)
+        let menuMove1 = SKAction.moveToY(view!.frame.height * (7 / 12), duration: 1 / 2)
         menu0.runAction(menuMove0)
         addChild(menu1)
         menu2.runAction(menuMove0)
@@ -592,7 +609,7 @@ class GameScene: SKScene {
     }
     
     func winAnimation(){
-        // asdf
+        menuCreation()
         
         
         let arrowForward = SKAction.resizeToHeight(500, duration: 8.0)
@@ -604,6 +621,8 @@ class GameScene: SKScene {
         print("game is ended")
         weAreLeavingThePlayGamePage()
         quitCurrentLevel()
+        
+///////////////////////////////////////////////////////////
         if 0 <= levelClicked && levelClicked <= 8{
             levelClicked += 1
         }else{
@@ -994,10 +1013,12 @@ class GameScene: SKScene {
                     runCheckState()
                 }else if anotherLevelButton.containsPoint(location) {
     //very broken
+                  
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////***
                     ALBTouch += 1
                     //pickLevel()
                     //testCode 8 levels
-                    adsf
+                   //adsf
                     if forba == 1{
                         levelClicked += 1
                         print("You Are On Level \(levelClicked + 1)")
@@ -1010,6 +1031,8 @@ class GameScene: SKScene {
                         print("You Are On Level \(levelClicked + 1)")
                         forba = 1
                     }
+                    levelPix()
+                    
                 }
             }
         }
